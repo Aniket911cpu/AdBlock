@@ -1,0 +1,53 @@
+{
+  "manifest_version": 3,
+  "name": "ShieldPlus - Advanced Adblocker",
+  "version": "1.0.0",
+  "description": "A production-ready adblocker with cosmetic filtering and per-site controls.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback",
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/shield-16.png",
+      "48": "icons/shield-48.png",
+      "128": "icons/shield-128.png"
+    }
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_1",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "icons/shield-16.png",
+    "48": "icons/shield-48.png",
+    "128": "icons/shield-128.png"
+  }
+}

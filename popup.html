@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShieldPlus</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-area">
+        <div class="shield-icon" id="shieldIcon">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <h1 class="brand-name">ShieldPlus</h1>
+      </div>
+      <div class="global-toggle-wrapper">
+        <label class="switch">
+          <input type="checkbox" id="globalToggle" checked>
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </header>
+
+    <!-- Main Status Card -->
+    <main>
+      <div class="status-card">
+        <div class="status-text">
+          <span id="statusMessage">Protection Active</span>
+          <div class="pulse-dot" id="statusDot"></div>
+        </div>
+      </div>
+
+      <!-- Current Site Control -->
+      <div class="site-card">
+        <div class="site-info">
+          <span class="site-label">Current Site</span>
+          <span class="site-url" id="currentDomain">loading...</span>
+        </div>
+        <div class="site-toggle">
+          <label class="switch small">
+            <input type="checkbox" id="siteToggle" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Stats Dashboard -->
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-number" id="pageStats">0</span>
+          <span class="stat-label">On This Page</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" id="totalStats">0</span>
+          <span class="stat-label">Total Blocked</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <button class="icon-btn" id="openOptions" title="Settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <span>Settings</span>
+      </button>
+      <button class="icon-btn" title="Report Issue">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+      </button>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
