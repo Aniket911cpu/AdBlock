@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShieldPlus Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <h2>ShieldPlus</h2>
+      </div>
+      <nav class="nav-menu">
+        <a href="#" class="nav-item active" data-tab="general">General</a>
+        <a href="#" class="nav-item" data-tab="whitelist">Allowed Sites</a>
+        <a href="#" class="nav-item" data-tab="filters">Filters</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      
+      <!-- General Tab -->
+      <section id="general" class="tab-content active">
+        <h1>General Settings</h1>
+        <div class="card">
+          <div class="setting-row">
+            <div class="setting-info">
+              <h3>Appearance</h3>
+              <p>Toggle dark mode for the extension interface.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="darkModeToggle">
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="divider"></div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <h3>Show Block Count</h3>
+              <p>Display the number of blocked ads on the extension badge.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Whitelist Tab -->
+      <section id="whitelist" class="tab-content">
+        <h1>Allowed Sites</h1>
+        <p class="description">Ads will not be blocked on these websites. Enter one domain per line.</p>
+        <div class="card">
+          <textarea id="whitelistInput" placeholder="example.com&#10;youtube.com" rows="10"></textarea>
+          <div class="actions">
+            <button id="saveWhitelist" class="btn primary">Save Changes</button>
+            <span id="saveStatus" class="status-msg"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filters Tab -->
+      <section id="filters" class="tab-content">
+        <h1>Filter Lists</h1>
+        <p class="description">Manage the blocklists used to identify ads and trackers.</p>
+        <div class="card">
+          <div class="filter-item">
+            <label class="checkbox-container">
+              EasyList (Recommended)
+              <input type="checkbox" checked disabled>
+              <span class="checkmark"></span>
+            </label>
+            <span class="badge">Core</span>
+          </div>
+          <div class="filter-item">
+            <label class="checkbox-container">
+              EasyPrivacy
+              <input type="checkbox" checked>
+              <span class="checkmark"></span>
+            </label>
+            <span class="badge">Privacy</span>
+          </div>
+          <div class="filter-item">
+            <label class="checkbox-container">
+              Fanboy's Social Blocking List
+              <input type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+            <span class="badge">Social</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>
