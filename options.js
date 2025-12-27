@@ -6,6 +6,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const whitelistInput = document.getElementById('whitelistInput');
   const saveWhitelistBtn = document.getElementById('saveWhitelist');
   const saveStatus = document.getElementById('saveStatus');
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  const html = document.documentElement;
+
+  // Load dark mode preference and apply it
+  chrome.storage.local.get(['darkMode'], (data) => {
+    const isDarkMode = data.darkMode || false;
+    darkModeToggle.checked = isDarkMode;
+    applyDarkMode(isDarkMode);
+  });
+
+  // Dark Mode Toggle Handler
+  darkModeToggle.addEventListener('change', (e) => {
+    const isDarkMode = e.target.checked;
+    chrome.storage.local.set({ darkMode: isDarkMode });
+    applyDarkMode(isDarkMode);
+  });
+
+  function applyDarkMode(isDarkMode) {
+    if (isDarkMode) {
+      html.setAttribute('data-theme', 'dark');
+    } else {
+      html.removeAttribute('data-theme');
+    }
+  }
 
   // Tab Navigation
   tabs.forEach(tab => {
@@ -78,6 +102,48 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         saveStatus.textContent = '';
       }, 2000);
+    });
+  });
+
+  // Filter Lists Management
+  const filterCheckboxes = document.querySelectorAll('.filter-item input[type="checkbox"]:not([disabled])');
+
+  // Load filter preferences
+  chrome.storage.local.get(['filters'], (data) => {
+    const filters = data.filters || {
+      easyPrivacy: true,
+      fanboysSocial: false
+    };
+
+    filterCheckboxes.forEach(checkbox => {
+      const filterLabel = checkbox.parentElement.textContent.trim();
+      if (filterLabel.includes('EasyPrivacy')) {
+        checkbox.checked = filters.easyPrivacy;
+      } else if (filterLabel.includes('Fanboy')) {
+        checkbox.checked = filters.fanboysSocial;
+      }
+    });
+  });
+
+  // Save filter preferences on change
+  filterCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', (e) => {
+      const filterLabel = e.target.parentElement.textContent.trim();
+
+      chrome.storage.local.get(['filters'], (data) => {
+        const filters = data.filters || {};
+
+        if (filterLabel.includes('EasyPrivacy')) {
+          filters.easyPrivacy = e.target.checked;
+        } else if (filterLabel.includes('Fanboy')) {
+          filters.fanboysSocial = e.target.checked;
+        }
+
+        chrome.storage.local.set({ filters }, () => {
+          // Notify background to update rules
+          chrome.runtime.sendMessage({ action: 'updateFilters', filters: filters });
+        });
+      });
     });
   });
 

@@ -10,9 +10,48 @@ document.addEventListener('DOMContentLoaded', () => {
   const statusDot = document.getElementById('statusDot');
   const shieldIcon = document.getElementById('shieldIcon');
   const openOptionsBtn = document.getElementById('openOptions');
+  const reportIssueBtn = document.getElementById('reportIssueBtn');
+  const darkModeBtn = document.getElementById('darkModeBtn');
+  const darkModeIcon = document.getElementById('darkModeIcon');
+  const html = document.documentElement;
 
   let currentTabId = null;
   let currentHostname = '';
+
+  // Load dark mode preference
+  chrome.storage.local.get(['darkMode'], (data) => {
+    const isDarkMode = data.darkMode || false;
+    applyDarkModeStyles(isDarkMode);
+  });
+
+  function applyDarkModeStyles(isDarkMode) {
+    if (isDarkMode) {
+      html.setAttribute('data-theme', 'dark');
+      darkModeIcon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+    } else {
+      html.removeAttribute('data-theme');
+      darkModeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+    }
+  }
+
+  // Dark Mode Toggle
+  darkModeBtn.addEventListener('click', () => {
+    chrome.storage.local.get(['darkMode'], (data) => {
+      const currentMode = data.darkMode || false;
+      const newMode = !currentMode;
+      chrome.storage.local.set({ darkMode: newMode });
+      applyDarkModeStyles(newMode);
+    });
+  });
+
+  // Report Issue Button
+  reportIssueBtn.addEventListener('click', () => {
+    try {
+      chrome.tabs.create({ url: chrome.runtime.getURL('feedback.html') });
+    } catch (e) {
+      window.open('feedback.html', '_blank');
+    }
+  });
 
   // 1. Initialize UI with stored values
   chrome.storage.local.get(['globalEnabled', 'totalBlocked', 'whitelistedDomains'], (data) => {
@@ -66,12 +105,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // Remove from whitelist (Enable blocking)
         list = list.filter(domain => domain !== currentHostname);
         // Message background to update DNR rules
-        await sendMessageToBackground({ action: 'updateWhitelist', domain: currentHostname, add: false });
+        try {
+          await sendMessageToBackground({ action: 'updateWhitelist', domain: currentHostname, add: false });
+        } catch (err) {
+          console.error('Error updating whitelist:', err);
+        }
       } else {
         // Add to whitelist (Disable blocking)
         if (!list.includes(currentHostname)) list.push(currentHostname);
         // Message background to update DNR rules
-        await sendMessageToBackground({ action: 'updateWhitelist', domain: currentHostname, add: true });
+        try {
+          await sendMessageToBackground({ action: 'updateWhitelist', domain: currentHostname, add: true });
+        } catch (err) {
+          console.error('Error updating whitelist:', err);
+        }
       }
 
       chrome.storage.local.set({ whitelistedDomains: list });

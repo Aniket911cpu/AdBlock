@@ -22,11 +22,19 @@
         </div>
         <h1 class="brand-name">ShieldPlus</h1>
       </div>
-      <div class="global-toggle-wrapper">
-        <label class="switch">
-          <input type="checkbox" id="globalToggle" checked>
-          <span class="slider round"></span>
-        </label>
+      <div class="header-controls">
+        <button class="icon-btn-small" id="darkModeBtn" title="Toggle Dark Mode">
+          <svg id="darkModeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <div class="global-toggle-wrapper">
+          <label class="switch">
+            <input type="checkbox" id="globalToggle" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
       </div>
     </header>
 
@@ -78,13 +86,14 @@
         </svg>
         <span>Settings</span>
       </button>
-      <button class="icon-btn" title="Report Issue">
+      <button class="icon-btn" id="reportIssueBtn" title="Report Issue">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round">
           <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
           <line x1="12" y1="9" x2="12" y2="13"></line>
           <line x1="12" y1="17" x2="12.01" y2="17"></line>
         </svg>
+        <span>Report</span>
       </button>
       <button class="icon-btn" id="rateBtnPopup" title="Rate ShieldPlus">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="0"

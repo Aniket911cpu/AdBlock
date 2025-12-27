@@ -9,6 +9,16 @@
   --border: #E5E7EB;
 }
 
+:root[data-theme="dark"] {
+  --primary: #6366F1;
+  --bg-body: #0F172A;
+  --bg-sidebar: #1E293B;
+  --bg-card: #1E293B;
+  --text-main: #F1F5F9;
+  --text-sub: #94A3B8;
+  --border: #334155;
+}
+
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -16,6 +26,7 @@ body {
   color: var(--text-main);
   height: 100vh;
   overflow: hidden;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .dashboard {
@@ -272,6 +283,11 @@ input:checked+.slider:before {
   border-radius: 8px;
   margin-bottom: 8px;
   border-left: 3px solid var(--primary);
+  transition: background 0.3s;
+}
+
+:root[data-theme="dark"] .todo-item {
+  background: #334155;
 }
 
 .todo-item.completed {
