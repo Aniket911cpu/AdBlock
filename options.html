@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>ShieldPlus Settings</title>
   <link rel="stylesheet" href="options.css">
 </head>
+
 <body>
   <div class="dashboard">
     <!-- Sidebar -->
@@ -16,12 +18,13 @@
         <a href="#" class="nav-item active" data-tab="general">General</a>
         <a href="#" class="nav-item" data-tab="whitelist">Allowed Sites</a>
         <a href="#" class="nav-item" data-tab="filters">Filters</a>
+        <a href="#" class="nav-item" data-tab="support">Support</a>
       </nav>
     </aside>
 
     <!-- Main Content -->
     <main class="content">
-      
+
       <!-- General Tab -->
       <section id="general" class="tab-content active">
         <h1>General Settings</h1>
@@ -95,8 +98,21 @@
         </div>
       </section>
 
+      <!-- Support Tab -->
+      <section id="support" class="tab-content">
+        <h1>Support & Feedback</h1>
+        <div class="card">
+          <p class="description">Need help or want to send feedback? Use the button below to open the feedback form.</p>
+          <div class="actions">
+            <button id="openFeedbackBtn" class="btn primary">Open Feedback Form</button>
+            <a class="btn" id="openChangelog" href="changelog.html" target="_blank">View Changelog</a>
+          </div>
+        </div>
+      </section>
+
     </main>
   </div>
   <script src="options.js"></script>
 </body>
+
 </html>

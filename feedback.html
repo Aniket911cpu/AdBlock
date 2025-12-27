@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Feedback — ShieldPlus</title>
+    <link rel="stylesheet" href="survey.css">
+</head>
+
+<body>
+    <main class="survey">
+        <img src="icons/shield-128.png" alt="ShieldPlus" class="logo">
+        <h1>Send Feedback</h1>
+        <p class="lead">Tell us what you liked or what we can improve.</p>
+
+        <form id="feedback-form">
+            <label for="email">Email (optional)</label>
+            <input id="email" name="email" placeholder="you@domain.com">
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" placeholder="How can we improve ShieldPlus?"></textarea>
+
+            <div class="form-actions">
+                <button type="submit" class="btn primary">Send Feedback</button>
+                <button type="button" id="mailtoBtn" class="btn">Send by Email</button>
+            </div>
+            <p id="fb-status" class="status-msg"></p>
+        </form>
+    </main>
+    <script src="feedback.js"></script>
+</body>
+
+</html>

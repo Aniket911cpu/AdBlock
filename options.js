@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   tabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
       e.preventDefault();
-      
+
       // Update Tab Styles
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
@@ -24,6 +24,18 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
+
+  // Support button: open feedback in new tab
+  const openFeedbackBtn = document.getElementById('openFeedbackBtn');
+  if (openFeedbackBtn) {
+    openFeedbackBtn.addEventListener('click', () => {
+      try {
+        chrome.tabs.create({ url: chrome.runtime.getURL('feedback.html') });
+      } catch (e) {
+        window.open('feedback.html', '_blank');
+      }
+    });
+  }
 
   // Load Whitelist
   chrome.storage.local.get(['whitelistedDomains'], (data) => {
@@ -50,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
       uniqueDomains.forEach(domain => {
         chrome.runtime.sendMessage({ action: 'updateWhitelist', domain: domain, add: true });
       });
-      
+
       // Show feedback
       saveStatus.textContent = 'Saved successfully!';
       setTimeout(() => {

@@ -36,8 +36,12 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
       "run_at": "document_idle"
     }
   ],
@@ -49,5 +53,7 @@
     "16": "icons/shield-16.png",
     "48": "icons/shield-48.png",
     "128": "icons/shield-128.png"
-  }
+  },
+  "homepage_url": "https://example.com",
+  "author": "ShieldPlus Team"
 }
