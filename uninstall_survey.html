@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>We value your feedback — ShieldPlus</title>
+    <link rel="stylesheet" href="survey.css">
+</head>
+
+<body>
+    <main class="survey">
+        <img src="icons/shield-128.png" alt="ShieldPlus" class="logo">
+        <h1>We're sorry to see you go</h1>
+        <p class="lead">Please tell us briefly why you uninstalled ShieldPlus — your feedback helps us improve.</p>
+
+        <form id="survey-form">
+            <label>How satisfied were you?</label>
+            <div class="ratings">
+                <button type="button" data-val="5">😄 Excellent</button>
+                <button type="button" data-val="4">🙂 Good</button>
+                <button type="button" data-val="3">😐 Okay</button>
+                <button type="button" data-val="2">😕 Poor</button>
+                <button type="button" data-val="1">😠 Very poor</button>
+            </div>
+
+            <label for="reason">What was the main reason?</label>
+            <select id="reason" name="reason">
+                <option value="ads_not_blocked">Ads not blocked</option>
+                <option value="performance">Performance issues</option>
+                <option value="features">Missing features</option>
+                <option value="bugs">Bugs or crashes</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="comments">Any additional comments (optional)</label>
+            <textarea id="comments" name="comments" rows="4"
+                placeholder="Tell us what we could do better..."></textarea>
+
+            <div class="form-actions">
+                <button type="submit" class="btn primary">Send Feedback</button>
+            </div>
+        </form>
+    </main>
+    <script src="survey.js"></script>
+</body>
+
+</html>

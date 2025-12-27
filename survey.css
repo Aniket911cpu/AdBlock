@@ -1,0 +1,87 @@
+:root {
+    --bg: #fff;
+    --accent: #4F46E5;
+    --muted: #6b7280
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+    background: #f3f4f6;
+    color: #0b1220;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh
+}
+
+.survey {
+    width: 100%;
+    max-width: 720px;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(2, 6, 23, 0.08)
+}
+
+.logo {
+    width: 64px;
+    height: 64px
+}
+
+h1 {
+    margin: 8px 0
+}
+
+.lead {
+    color: var(--muted)
+}
+
+label {
+    display: block;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    font-weight: 600
+}
+
+.ratings {
+    display: flex;
+    gap: 8px
+}
+
+.ratings button {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #e6e9ef;
+    background: #fafafa;
+    cursor: pointer
+}
+
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e6e9ef
+}
+
+.form-actions {
+    margin-top: 14px
+}
+
+.btn {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    cursor: pointer
+}
+
+.btn.primary {
+    background: linear-gradient(90deg, var(--accent), #7c3aed);
+    color: #fff;
+    border: none
+}

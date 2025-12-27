@@ -1,0 +1,84 @@
+:root {
+    --bg: #0f172a;
+    --card: #0b1220;
+    --accent: #4F46E5;
+    --muted: #94a3b8;
+    --text: #e6eef8
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+    color: var(--text);
+    background: linear-gradient(180deg, #071028 0%, #0b1220 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.container {
+    max-width: 720px;
+    padding: 36px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+    text-align: center
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 12px
+}
+
+h1 {
+    margin: 0;
+    font-size: 28px
+}
+
+.lead {
+    color: var(--muted);
+    margin: 12px 0 20px
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 20px
+}
+
+.btn {
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--text);
+    text-decoration: none;
+    cursor: pointer
+}
+
+.btn.primary {
+    background: linear-gradient(90deg, var(--accent), #7c3aed);
+    border: none
+}
+
+.features {
+    text-align: left;
+    margin-top: 8px
+}
+
+.features h2 {
+    font-size: 16px;
+    margin-bottom: 8px
+}
+
+.features ul {
+    padding-left: 20px;
+    color: var(--muted)
+}

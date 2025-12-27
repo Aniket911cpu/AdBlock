@@ -1,12 +1,29 @@
 // background.js
 
-// Initialize storage on install
-chrome.runtime.onInstalled.addListener(() => {
+// Initialize storage on install and show welcome page on first install
+chrome.runtime.onInstalled.addListener((details) => {
   chrome.storage.local.set({
     globalEnabled: true,
     totalBlocked: 0,
     whitelistedDomains: []
   });
+
+  // If newly installed, open welcome page in a new tab
+  if (details && details.reason === 'install') {
+    try {
+      chrome.tabs.create({ url: chrome.runtime.getURL('welcome.html') });
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  // Set an uninstall survey URL (must be an external, hosted URL).
+  // Replace the URL below with the publicly hosted `uninstall_survey.html` location.
+  try {
+    chrome.runtime.setUninstallURL('https://example.com/uninstall-survey.html');
+  } catch (e) {
+    // ignore if API not available
+  }
 });
 
 // Listener for rule matches (requires declarativeNetRequestFeedback permission)
