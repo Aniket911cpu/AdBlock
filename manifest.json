@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ShieldPlus - Advanced Adblocker",
-  "version": "1.0.0",
+  "version": "2.1.2",
   "description": "A production-ready adblocker with cosmetic filtering and per-site controls.",
   "permissions": [
     "activeTab",
@@ -54,6 +54,6 @@
     "48": "icons/shield-48.png",
     "128": "icons/shield-128.png"
   },
-  "homepage_url": "https://example.com",
-  "author": "ShieldPlus Team"
+  "homepage_url": "https://alphabytecore.com/ShieldPlus",
+  "author": "AlphaByte"
 }
