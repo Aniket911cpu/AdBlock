@@ -18,6 +18,7 @@
         <a href="#" class="nav-item active" data-tab="general">General</a>
         <a href="#" class="nav-item" data-tab="whitelist">Allowed Sites</a>
         <a href="#" class="nav-item" data-tab="filters">Filters</a>
+        <a href="#" class="nav-item" data-tab="todos">Todos</a>
         <a href="#" class="nav-item" data-tab="support">Support</a>
       </nav>
     </aside>
@@ -95,6 +96,18 @@
             </label>
             <span class="badge">Social</span>
           </div>
+        </div>
+      </section>
+
+      <!-- Todos Tab -->
+      <section id="todos" class="tab-content">
+        <h1>Quick Tasks</h1>
+        <div class="card">
+          <div class="todo-input-area">
+            <input type="text" id="todoInput" placeholder="Add a new task..." class="todo-input">
+            <button id="addTodoBtn" class="btn primary">Add</button>
+          </div>
+          <ul id="todoList" class="todo-list"></ul>
         </div>
       </section>
 

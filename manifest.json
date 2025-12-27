@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "ShieldPlus - Advanced Adblocker",
   "version": "2.1.2",
-  "description": "A production-ready adblocker with cosmetic filtering and per-site controls.",
+  "description": "Lightning-fast ad & tracker blocking with AI-powered protection. Stop ads, reclaim speed, and protect your privacy. Plus: whitelisting, dark mode, detailed stats & more.",
   "permissions": [
     "activeTab",
     "storage",
