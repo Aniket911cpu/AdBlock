@@ -37,6 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Open rate page from options
+  const openRateBtn = document.getElementById('openRateBtn');
+  const RATE_URL = 'https://chrome.google.com/webstore/detail/EXTENSION_ID/reviews';
+  if (openRateBtn) {
+    openRateBtn.addEventListener('click', () => {
+      try { chrome.tabs.create({ url: RATE_URL }); }
+      catch (e) { window.open(RATE_URL, '_blank'); }
+    });
+  }
+
   // Load Whitelist
   chrome.storage.local.get(['whitelistedDomains'], (data) => {
     if (data.whitelistedDomains) {

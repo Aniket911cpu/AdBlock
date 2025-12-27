@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Per-Site Toggle Change
   siteToggle.addEventListener('change', async (e) => {
     const blockingEnabled = e.target.checked; // Checked = Blocking ON
-    
+
     // Get latest list
     chrome.storage.local.get(['whitelistedDomains'], async (data) => {
       let list = data.whitelistedDomains || [];
@@ -83,6 +83,16 @@ document.addEventListener('DOMContentLoaded', () => {
   openOptionsBtn.addEventListener('click', () => {
     chrome.runtime.openOptionsPage();
   });
+
+  // Rate button in popup
+  const rateBtnPopup = document.getElementById('rateBtnPopup');
+  const RATE_URL = 'https://chrome.google.com/webstore/detail/EXTENSION_ID/reviews';
+  if (rateBtnPopup) {
+    rateBtnPopup.addEventListener('click', () => {
+      try { chrome.tabs.create({ url: RATE_URL }); }
+      catch (e) { window.open(RATE_URL, '_blank'); }
+    });
+  }
 
   // Helper Functions
   function updateGlobalStatus(isEnabled) {
