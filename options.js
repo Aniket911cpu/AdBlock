@@ -52,10 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Support button: open feedback in new tab
   const openFeedbackBtn = document.getElementById('openFeedbackBtn');
   if (openFeedbackBtn) {
-    openFeedbackBtn.addEventListener('click', () => {
+    openFeedbackBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       try {
         chrome.tabs.create({ url: chrome.runtime.getURL('feedback.html') });
-      } catch (e) {
+      } catch (err) {
+        console.error('Error opening feedback:', err);
         window.open('feedback.html', '_blank');
       }
     });
@@ -65,9 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const openRateBtn = document.getElementById('openRateBtn');
   const RATE_URL = 'https://chrome.google.com/webstore/detail/EXTENSION_ID/reviews';
   if (openRateBtn) {
-    openRateBtn.addEventListener('click', () => {
-      try { chrome.tabs.create({ url: RATE_URL }); }
-      catch (e) { window.open(RATE_URL, '_blank'); }
+    openRateBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      try {
+        chrome.tabs.create({ url: RATE_URL });
+      } catch (err) {
+        console.error('Error opening rate page:', err);
+        window.open(RATE_URL, '_blank');
+      }
     });
   }
 
@@ -105,8 +112,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Filter Lists Management
-  const filterCheckboxes = document.querySelectorAll('.filter-item input[type="checkbox"]:not([disabled])');
+  // Filter Lists Management - Select checkboxes that are not disabled
+  const selectFilterCheckboxes = () => {
+    return document.querySelectorAll('.filter-item input[type="checkbox"]:not([disabled])');
+  };
 
   // Load filter preferences
   chrome.storage.local.get(['filters'], (data) => {
@@ -115,27 +124,27 @@ document.addEventListener('DOMContentLoaded', () => {
       fanboysSocial: false
     };
 
-    filterCheckboxes.forEach(checkbox => {
-      const filterLabel = checkbox.parentElement.textContent.trim();
-      if (filterLabel.includes('EasyPrivacy')) {
+    selectFilterCheckboxes().forEach(checkbox => {
+      const labelText = checkbox.closest('.checkbox-container')?.textContent || '';
+      if (labelText.includes('EasyPrivacy')) {
         checkbox.checked = filters.easyPrivacy;
-      } else if (filterLabel.includes('Fanboy')) {
+      } else if (labelText.includes('Fanboy')) {
         checkbox.checked = filters.fanboysSocial;
       }
     });
   });
 
   // Save filter preferences on change
-  filterCheckboxes.forEach(checkbox => {
+  selectFilterCheckboxes().forEach(checkbox => {
     checkbox.addEventListener('change', (e) => {
-      const filterLabel = e.target.parentElement.textContent.trim();
+      const labelText = e.target.closest('.checkbox-container')?.textContent || '';
 
       chrome.storage.local.get(['filters'], (data) => {
         const filters = data.filters || {};
 
-        if (filterLabel.includes('EasyPrivacy')) {
+        if (labelText.includes('EasyPrivacy')) {
           filters.easyPrivacy = e.target.checked;
-        } else if (filterLabel.includes('Fanboy')) {
+        } else if (labelText.includes('Fanboy')) {
           filters.fanboysSocial = e.target.checked;
         }
 
@@ -152,8 +161,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const addTodoBtn = document.getElementById('addTodoBtn');
   const todoList = document.getElementById('todoList');
 
+  // Verify all elements exist before adding listeners
+  if (!todoInput || !addTodoBtn || !todoList) {
+    console.error('Todo elements not found');
+  }
+
   // Load todos from storage
   function loadTodos() {
+    if (!todoList) return;
     chrome.storage.local.get(['todos'], (data) => {
       const todos = data.todos || [];
       todoList.innerHTML = '';
@@ -178,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       document.querySelectorAll('.todo-delete').forEach(btn => {
         btn.addEventListener('click', (e) => {
+          e.preventDefault();
           const idx = parseInt(e.target.getAttribute('data-index'));
           deleteTodo(idx);
         });
@@ -204,26 +220,35 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function addTodo(text) {
-    if (!text.trim()) return;
+    if (!text || !text.trim()) return;
     chrome.storage.local.get(['todos'], (data) => {
       const todos = data.todos || [];
       todos.push({ text: text.trim(), completed: false });
       chrome.storage.local.set({ todos }, () => {
         loadTodos();
-        todoInput.value = '';
+        if (todoInput) {
+          todoInput.value = '';
+        }
       });
     });
   }
 
-  addTodoBtn.addEventListener('click', () => {
-    addTodo(todoInput.value);
-  });
+  // Add event listeners with null checks
+  if (addTodoBtn) {
+    addTodoBtn.addEventListener('click', () => {
+      if (todoInput) {
+        addTodo(todoInput.value);
+      }
+    });
+  }
 
-  todoInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      addTodo(todoInput.value);
-    }
-  });
+  if (todoInput) {
+    todoInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addTodo(todoInput.value);
+      }
+    });
+  }
 
   function escapeHtml(text) {
     const map = {
@@ -238,3 +263,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Load todos on page load
   loadTodos();
+});
